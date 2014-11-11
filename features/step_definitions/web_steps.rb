@@ -28,3 +28,17 @@ Then(/^I should be asked to place my ships$/) do
   expect(page).to have_content "Please enter the first coordinates and orientations of your ships"
 end
 
+Given(/^I have registered$/) do
+  visit '/'
+  step('I click on "New Game"')
+  step('I click "Register"')
+end
+
+When(/^I choose my ship placements$/) do
+  pending # select('A', :from => 'ship_one_row')
+end
+
+Then(/^I wait for the game to be ready$/) do
+  pending # express the regexp above with the code you wish you had
+end
+

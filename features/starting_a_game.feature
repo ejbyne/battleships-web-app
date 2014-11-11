@@ -13,3 +13,9 @@ Scenario: Registering first player
   When I click "Register"
   And I am greeted
   Then I should be asked to place my ships
+
+Scenario: Placing ships on the board
+  Given I have registered
+  When I choose my ship placements
+  And I click "Place Ships"
+  Then I wait for the game to be ready
