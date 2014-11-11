@@ -1,0 +1,11 @@
+<h1>Welcome to Battle Ships!</h1>
+
+<% if @name %>
+  <h2>Hello, <%= @name %></h2>
+
+<% else %>
+  <form action="/" method="post">
+    Name: <input type="text" name="player_name">
+    <input type="submit" value="Submit">
+  </form>
+<% end %>
