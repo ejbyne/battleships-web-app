@@ -7,3 +7,8 @@ Scenario: Visiting the homepage
   Given I visit the homepage
   When I click on "New Game"
   Then I should see "Enter your name"
+
+Scenario: Registering first player
+  Given I enter my name
+  When I click "Register"
+  Then I should be asked to place my ships
