@@ -8,9 +8,9 @@ class BattleShips < Sinatra::Base
     erb :index 
   end
 
-  post '/' do
+  post '/registration' do
     @name = params[:player_name]
-    erb :index
+    erb :registration
   end
 
   # start the server if ruby file executed directly

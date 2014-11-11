@@ -1,0 +1,11 @@
+
+<% if @name %>
+  <h2>Hello, <%= @name %></h2>
+
+<% else %>
+  <h2>Enter your name</h2>
+  <form action="/" method="post">
+    Name: <input type="text" name="player_name">
+    <input type="submit" value="Submit">
+  </form>
+<% end %>
