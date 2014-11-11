@@ -2,3 +2,16 @@
 
 <p>Please enter the first coordinates and orientations of your ships</p>
 
+<table>
+  <tr>
+    <% @grid.each_value do |value| %>
+      <% if value == '~' %>
+        <td>~</td>
+      <% else %>
+        <td>X</td>
+      <% end %>
+    <% end %>
+  </tr>
+</table>
+
+

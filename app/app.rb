@@ -19,6 +19,7 @@ class BattleShips < Sinatra::Base
   post '/place_ships' do
     @player = Player.new
     @player.name = params[:player_name]
+    @grid = { :A1 => '~', :A2 => 'X', :A3 => 'X', :B1 => '~', :B2 => '~', :B3 => '~', :C1 => '~', :C2 => 'X', :C3 => '~' }
     erb :place_ships
   end
 
