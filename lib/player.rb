@@ -1,6 +1,6 @@
 class Player
 
-  attr_accessor :board
+  attr_accessor :board, :name
 
   def board
     !@board.nil?

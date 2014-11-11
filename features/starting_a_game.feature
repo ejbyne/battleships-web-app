@@ -11,4 +11,5 @@ Scenario: Visiting the homepage
 Scenario: Registering first player
   Given I enter my name
   When I click "Register"
+  And I am greeted
   Then I should be asked to place my ships
