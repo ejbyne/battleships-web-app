@@ -39,7 +39,7 @@ class Board
       coord.next
       elsif orientation == 'vertical'
       coord.reverse.next.reverse
-  end
+    end
   end
 
   def place(ship, coord, orientation)

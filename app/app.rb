@@ -25,7 +25,7 @@ class BattleShips < Sinatra::Base
     @player = Player.new
     @player.name = params[:player_name]
     @grid = @board.grid
-    @values = @grid.values
+    @rows = @grid.values.each_slice(10).map{|row| row}
     @player.board = @board
     erb :place_ships
   end

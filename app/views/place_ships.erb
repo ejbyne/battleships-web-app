@@ -13,7 +13,7 @@
 
   </tr>
   <% number = "1" %>
-  <% @values.each_slice(10) do |row| %>
+  <% @rows.each do |row| %>
   <tr>
     <th><%= number %></th>
       <% row.each do |coord| %>
