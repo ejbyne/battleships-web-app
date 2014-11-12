@@ -9,10 +9,12 @@ require_relative '../lib/ship'
 class BattleShips < Sinatra::Base
 
   set :views, Proc.new { File.join(root, "views") }
-  
+  enable :sessions
+
   GAME = Game.new
 
   get '/' do
+    session[:game] = GAME
     erb :index 
   end
 
@@ -20,14 +22,30 @@ class BattleShips < Sinatra::Base
     erb :registration
   end
 
-  post '/place_ships' do
-    @board = Board.new
-    @player = Player.new
-    @player.name = params[:player_name]
+  post '/new_player' do
+    player = Player.new
+    player.name = params[:player_name]
+    GAME.add_player(player)
+    board = Board.new
+    session[:me] = player.object_id
+    GAME.player_id(session[:me]).board = board
+    redirect '/place_ships'
+  end
+
+  get '/place_ships' do
+    @player = GAME.player_id(session[:me])
+    @board = GAME.player_id(session[:me]).board
+    puts @player
+    puts @board
+    puts session.inspect
     @grid = @board.grid
-    @values = @grid.values
-    @player.board = @board
+    @rows = @grid.values.each_slice(10).map { |row| row }
     erb :place_ships
+  end
+
+  post '/place_ships' do
+    puts params
+    redirect '/place_ships'
   end
 
   # start the server if ruby file executed directly

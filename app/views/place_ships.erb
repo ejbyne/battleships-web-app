@@ -13,7 +13,7 @@
 
   </tr>
   <% number = "1" %>
-  <% @values.each_slice(10) do |row| %>
+  <% @rows.each do |row| %>
   <tr>
     <th><%= number %></th>
       <% row.each do |coord| %>
@@ -28,4 +28,41 @@
   <% end %>
 </table>
 
+<h2>Aircraft Carrier</h2>
+  <form action='/place_ships' method='post'>
+    <label for="row">Row</label>
+      <select id="row" name="aircraft_carrier_row">
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="D">D</option>
+        <option value="E">E</option>
+        <option value="F">F</option>
+        <option value="G">G</option>
+        <option value="H">H</option>
+        <option value="I">I</option>
+        <option value="J">J</option>
+      </select>
+    <label for="row">Column</label>
+      <select id="column" name="aircraft_carrier_column">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
+    <label for="orientation">Orientation</label>
+      <select id="orientation" name="aircraft_carrier_orientation">
+        <option value="horizontal">Horizontal</option>
+        <option value="vertical">Vertical</option>
+    </select>
+    <input type='submit' value="Place Ship">
+  </form>
+
+     
 

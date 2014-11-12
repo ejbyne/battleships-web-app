@@ -2,7 +2,7 @@ class Player
 
   attr_accessor :board, :name
 
-  def board
+  def board?
     !@board.nil?
   end
 
