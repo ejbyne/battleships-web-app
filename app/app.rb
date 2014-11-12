@@ -23,22 +23,18 @@ class BattleShips < Sinatra::Base
   end
 
   post '/new_player' do
-    player = Player.new
-    player.name = params[:player_name]
-    GAME.add_player(player)
+    @player = Player.new
+    @player.name = params[:player_name]
+    GAME.add_player(@player)
     board = Board.new
-    session[:me] = player.object_id
+    session[:me] = @player.object_id
     GAME.player_id(session[:me]).board = board
-    # aircraft_carrier = Ship.aircraft_carrier
-    # battleship = Ship.battleship
-    # destroyer = Ship.destroyer
-    # submarine = Ship.submarine
-    # patrol_boat = Ship.patrol_boat
     redirect '/place_ships'
   end
 
   get '/place_ships' do
     @player = GAME.player_id(session[:me])
+    
     @board = GAME.player_id(session[:me]).board
     puts @player
     puts @board
@@ -53,8 +49,13 @@ class BattleShips < Sinatra::Base
   post '/place_ships' do
     puts params
     @board = GAME.player_id(session[:me]).board
-    @aircraft_carrier = Ship.battleship
-    @board.place(@aircraft_carrier, (params[:aircraft_carrier_row] + params[:aircraft_carrier_column]).to_sym, params[:aircraft_carrier_orientation])
+    ship_choice = params[:ship]
+    ship = Ship.aircraft_carrier if ship_choice == "aircraft_carrier"
+    ship = Ship.battleship if ship_choice == "battleship"
+    ship = Ship.destroyer if ship_choice == "destroyer"
+    ship = Ship.submarine if ship_choice == "submarine"
+    ship = Ship.patrol_boat if ship_choice == "patrol_boat"
+    @board.place(ship, (params[:row] + params[:column]).to_s, params[:orientation])
     redirect '/place_ships'
   end
 

@@ -31,9 +31,9 @@ Given(/^I have registered$/) do
 end
 
 When(/^I choose a ship placement$/) do
-  select('A', :from => 'aircraft_carrier_row')
-  select('5', :from => 'aircraft_carrier_column')
-  select('Vertical', :from => 'aircraft_carrier_orientation')
+  select('A', :from => 'row')
+  select('5', :from => 'column')
+  select('vertical', :from => 'orientation')
 end
 
 Then(/^I should see an updated board$/) do
