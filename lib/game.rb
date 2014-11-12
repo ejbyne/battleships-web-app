@@ -13,7 +13,7 @@ class Game
 
   def player_id(id)
     x = @players.select do |player|
-      player.object_id
+      player.object_id == id
     end
     x[0]
   end

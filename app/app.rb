@@ -47,16 +47,25 @@ class BattleShips < Sinatra::Base
   end
 
   post '/place_ships' do
-    puts params
     @board = GAME.player_id(session[:me]).board
+    redirect '/game' if GAME.ready?
+    #redirect '/waiting' if @board.ship_count == 5
     ship_choice = params[:ship]
     ship = Ship.aircraft_carrier if ship_choice == "aircraft_carrier"
     ship = Ship.battleship if ship_choice == "battleship"
     ship = Ship.destroyer if ship_choice == "destroyer"
     ship = Ship.submarine if ship_choice == "submarine"
     ship = Ship.patrol_boat if ship_choice == "patrol_boat"
-    @board.place(ship, (params[:row] + params[:column]).to_s, params[:orientation])
+    @board.place(ship, (params[:column] + params[:row]).to_s, params[:orientation])
     redirect '/place_ships'
+  end
+
+  get '/waiting' do
+    erb :waiting
+  end
+
+  get '/game' do
+    erb :game
   end
 
   # start the server if ruby file executed directly

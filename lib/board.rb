@@ -65,7 +65,7 @@ class Board
   end
 
   def ship_count
-    @grid.values.count(cell.content == ship)
+    @grid.values.count(value.content.is_a?(Ship))
   end
 
   end
