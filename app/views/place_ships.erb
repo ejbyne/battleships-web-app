@@ -2,16 +2,30 @@
 
 <p>Please enter the first coordinates and orientations of your ships</p>
 
-<table>
+<table border=1 width=400>
   <tr>
-    <% @grid.each_value do |value| %>
-      <% if value == '~' %>
-        <td>~</td>
-      <% else %>
-        <td>X</td>
-      <% end %>
+    <th></th>
+    <% letter = "A" %>
+    <% 10.times do %>
+      <th><%= letter %></th>
+      <% letter = letter.next %>
     <% end %>
+
   </tr>
+  <% number = "1" %>
+  <% @values.each_slice(10) do |row| %>
+  <tr>
+    <th><%= number %></th>
+      <% row.each do |coord| %>
+        <% if coord.content.is_a?(Ship) %>
+          <td bgcolor="grey"></td>
+        <% else %>
+          <td bgcolor="blue"></td>
+        <% end %>  
+      <% end %>
+    <% number = number.next %>
+  </tr>
+  <% end %>
 </table>
 
 

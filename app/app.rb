@@ -1,6 +1,10 @@
 require 'sinatra/base'
 require_relative '../lib/player'
 require_relative '../lib/game'
+require_relative '../lib/board'
+require_relative '../lib/water'
+require_relative '../lib/cell'
+require_relative '../lib/ship'
 
 class BattleShips < Sinatra::Base
 
@@ -17,9 +21,12 @@ class BattleShips < Sinatra::Base
   end
 
   post '/place_ships' do
+    @board = Board.new
     @player = Player.new
     @player.name = params[:player_name]
-    @grid = { :A1 => '~', :A2 => 'X', :A3 => 'X', :B1 => '~', :B2 => '~', :B3 => '~', :C1 => '~', :C2 => 'X', :C3 => '~' }
+    @grid = @board.grid
+    @values = @grid.values
+    @player.board = @board
     erb :place_ships
   end
 
