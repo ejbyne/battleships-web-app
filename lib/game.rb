@@ -11,6 +11,13 @@ class Game
   	self.players << player
 	end
 
+  def player_id(id)
+    x = @players.select do |player|
+      player.object_id
+    end
+    x[0]
+  end
+
   def attacker
     players[0]
   end
@@ -24,7 +31,7 @@ class Game
   end
 
   def has_boards?
-    attacker.board and opponent.board
+    attacker.board? and opponent.board?
   end
 
   def has_ships?

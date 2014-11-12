@@ -5,7 +5,7 @@ Feature: Starting Battle-Ships game
 
 Scenario: Visiting the homepage
   Given I visit the homepage
-  When I click on "New Game"
+  When I click "New Game"
   Then I should see "Enter your name"
 
 Scenario: Registering first player
@@ -16,6 +16,6 @@ Scenario: Registering first player
 
 Scenario: Placing ships on the board
   Given I have registered
-  When I choose my ship placements
-  And I click "Place Ships"
-  Then I wait for the game to be ready
+  When I choose a ship placement
+  And I click "Place Ship"
+  Then I should see an updated board

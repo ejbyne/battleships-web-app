@@ -46,7 +46,7 @@ class Board
   coords = [coord]
     ship.length.times{coords << next_coord(coords.last, orientation)}
     coords.pop
-    coords.each{ |key| grid[key.to_sym] = ship  }
+    coords.each{ |key| grid[key.to_sym].content = ship  }
   end
 
   def coord_in_grid(coord)
