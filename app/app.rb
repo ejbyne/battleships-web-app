@@ -14,7 +14,7 @@ class BattleShips < Sinatra::Base
   GAME = Game.new
 
   get '/' do
-    session[:game] = GAME
+    
     erb :index 
   end
 
@@ -60,6 +60,10 @@ class BattleShips < Sinatra::Base
   end
 
   get '/game' do
+    @player = GAME.select_player_by_id(session[:me])
+    @board = @player.board
+    @grid = @board.grid
+    @rows = @grid.values.each_slice(10).to_a
     erb :game
   end
 
