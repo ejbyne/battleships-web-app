@@ -9,15 +9,39 @@
       <th><%= letter %></th>
       <% letter = letter.next %>
     <% end %>
-
   </tr>
   <% number = "1" %>
-  <% @rows.each do |row| %>
+  <% @rows1.each do |row| %>
   <tr>
     <th><%= number %></th>
       <% row.each do |coord| %>
         <% if coord.content.is_a?(Ship) and coord.content.hit? then %> <td bgcolor="red"></td> <% end %>
         <% if coord.content.is_a?(Ship) then %> <td bgcolor="grey"></td> <% end %>
+        <% if coord.content.is_a?(Water) and coord.content.hit? then %> <td bgcolor="yellow"></td> <% end %>
+        <% if coord.content.is_a?(Water) then %> <td bgcolor="blue"></td> <% end %>  
+      <% end %>
+    <% number = number.next %>
+  </tr>
+  <% end %>
+</table>
+
+<table border=1 width=400>
+  <tr>
+  <tr><th colspan=11>Opponent's Board</th></tr>
+    <th></th>
+    <% letter = "A" %>
+    <% 10.times do %>
+      <th><%= letter %></th>
+      <% letter = letter.next %>
+    <% end %>
+  </tr>
+  <% number = "1" %>
+  <% @rows2.each do |row| %>
+  <tr>
+    <th><%= number %></th>
+      <% row.each do |coord| %>
+        <% if coord.content.is_a?(Ship) and coord.content.hit? then %> <td bgcolor="red"></td> <% end %>
+        <% if coord.content.is_a?(Ship) then %> <td bgcolor="blue"></td> <% end %>
         <% if coord.content.is_a?(Water) and coord.content.hit? then %> <td bgcolor="yellow"></td> <% end %>
         <% if coord.content.is_a?(Water) then %> <td bgcolor="blue"></td> <% end %>  
       <% end %>

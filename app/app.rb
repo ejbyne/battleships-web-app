@@ -60,10 +60,14 @@ class BattleShips < Sinatra::Base
   end
 
   get '/game' do
-    @player = GAME.select_player_by_id(session[:me])
-    @board = @player.board
-    @grid = @board.grid
-    @rows = @grid.values.each_slice(10).to_a
+    @player1 = GAME.select_player_by_id(session[:me])
+    @board1 = @player1.board
+    @grid1 = @board1.grid
+    @rows1 = @grid1.values.each_slice(10).to_a
+    @player2 = GAME.select_other_player_by_id(session[:me])
+    @board2 = @player2.board
+    @grid2 = @board2.grid
+    @rows2 = @grid2.values.each_slice(10).to_a
     erb :game
   end
 

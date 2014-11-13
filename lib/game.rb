@@ -18,6 +18,13 @@ class Game
     select_player[0]
   end
 
+    def select_other_player_by_id(id)
+    select_player = @players.select do |player|
+      player.object_id != id
+    end
+    select_player[0]
+  end
+
   def attacker
     players[0]
   end
