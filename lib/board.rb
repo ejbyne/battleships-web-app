@@ -42,6 +42,7 @@ class Board
   coords = [coord]
     ship.length.times{coords << next_coord(coords.last, orientation)}
     coords.pop
+    raise_errors_if_cant_place_ship(coords)
     coords.each{ |key| grid[key.to_sym].content = ship  }
   end
 
@@ -71,6 +72,23 @@ class Board
         grid[coord.to_sym] = hit!
       end
     end
+  end
+
+  def is_a_ship?(cell)
+    cell.content.respond_to?(:sunk?) 
+  end
+
+  # def any_coord_not_on_grid?(coords)
+  #   (grid.keys & coords) != coords
+  # end
+
+  def any_coord_is_already_a_ship?(coords)
+    coords.any?{|coord| is_a_ship?(grid[coord.to_sym])}
+  end
+
+  def raise_errors_if_cant_place_ship(coords)
+    # raise "You cannot place a ship outside of the grid" if any_coord_not_on_grid?(coords)
+    raise "You cannot place a ship on another ship" if any_coord_is_already_a_ship?(coords)
   end
 
 end
