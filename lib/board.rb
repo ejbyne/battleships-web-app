@@ -1,7 +1,3 @@
-# class Cell
-# attr_accessor :content
-# end
-
 class Board 
 
   attr_accessor :grid, :coords, :content
@@ -15,17 +11,17 @@ class Board
     gridded
   end
 
-  def rows
+  def columns
     @letters = [*'A'..'J']
   end
 
-  def columns
+  def rows
     @numbers = [*1..10]
   end
 
   def setting_coordinates
-    @letters.each do |letter|
-      @numbers.each{|number| @coords << letter + number.to_s }
+    @numbers.each do |number|
+      @letters.each{|letter| @coords << letter + number.to_s }
     end
   end
 
@@ -35,9 +31,9 @@ class Board
   end
 
   def next_coord(coord, orientation)
-    if orientation == 'horizontal'
+    if orientation == 'vertical'
       coord.next
-      elsif orientation == 'vertical'
+    elsif orientation == 'horizontal'
       coord.reverse.next.reverse
     end
   end
@@ -47,6 +43,18 @@ class Board
     ship.length.times{coords << next_coord(coords.last, orientation)}
     coords.pop
     coords.each{ |key| grid[key.to_sym].content = ship  }
+  end
+
+  def ships
+    @grid.values.select{|cell| cell.content.is_a?(Ship)}.map(&:content).uniq
+  end
+
+  def ship_count
+    ships.count
+  end
+
+  def floating_ships?
+    !ships.any?(&:sunk?)
   end
 
   def coord_in_grid(coord)
@@ -60,13 +68,9 @@ class Board
   def shoot(coord)
     if coord_in_grid(coord)
       if !already_hit(coord)
-      grid[coord.to_sym] = hit!
+        grid[coord.to_sym] = hit!
+      end
     end
   end
 
-  def ship_count
-    @grid.values.count(value.content.is_a?(Ship))
-  end
-
-  end
 end

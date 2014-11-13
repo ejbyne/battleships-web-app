@@ -34,22 +34,16 @@ class BattleShips < Sinatra::Base
 
   get '/place_ships' do
     @player = GAME.player_id(session[:me])
-    
     @board = GAME.player_id(session[:me]).board
-    puts @player
-    puts @board
-    puts session.inspect
+    redirect '/game' if GAME.ready?
+    redirect '/waiting' if @board.ship_count == 5
     @grid = @board.grid
     @rows = @grid.values.each_slice(10).map{|row| row}
-    @player.board = @board
-    @rows = @grid.values.each_slice(10).map { |row| row }
     erb :place_ships
   end
 
   post '/place_ships' do
     @board = GAME.player_id(session[:me]).board
-    redirect '/game' if GAME.ready?
-    #redirect '/waiting' if @board.ship_count == 5
     ship_choice = params[:ship]
     ship = Ship.aircraft_carrier if ship_choice == "aircraft_carrier"
     ship = Ship.battleship if ship_choice == "battleship"
@@ -61,6 +55,7 @@ class BattleShips < Sinatra::Base
   end
 
   get '/waiting' do
+    redirect '/game' if GAME.ready?
     erb :waiting
   end
 
