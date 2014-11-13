@@ -75,7 +75,7 @@ class BattleShips < Sinatra::Base
     @other_player = GAME.select_other_player_by_id(session[:me])
     @other_board = @other_player.board
     @other_board.shoot((params[:column] + params[:row]).to_s)
-    erb :game
+    redirect '/game'
   end
 
   get '/reset' do
