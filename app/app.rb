@@ -74,7 +74,7 @@ class BattleShips < Sinatra::Base
   post '/game' do
     @other_player = GAME.select_other_player_by_id(session[:me])
     @other_board = @other_player.board
-    @other_board.shoot((params[:column] + params[:row]).to_s)
+    @other_board.shoot(params[:column] + params[:row])
     redirect '/game'
   end
 
