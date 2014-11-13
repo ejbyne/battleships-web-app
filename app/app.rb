@@ -45,6 +45,7 @@ class BattleShips < Sinatra::Base
   post '/place_ships' do
       @board = GAME.select_player_by_id(session[:me]).board
       ship_choice = params[:ship]
+      session[ship_choice] = ship_choice
       ship = Ship.aircraft_carrier if ship_choice == "aircraft_carrier"
       ship = Ship.battleship if ship_choice == "battleship"
       ship = Ship.destroyer if ship_choice == "destroyer"

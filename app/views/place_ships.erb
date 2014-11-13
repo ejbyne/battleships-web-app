@@ -37,11 +37,21 @@
   <form action='/place_ships' method='post'>
     <label for="ship">Ship</label>
       <select id="ship" name="ship">
-        <option value="aircraft_carrier">Aircraft Carrier</option>
-        <option value="battleship">Battleship</option>
-        <option value="destroyer">Destroyer</option>
-        <option value="submarine">Submarine</option>
-        <option value="patrol_boat">Patrol Boat</option>
+        <% unless session["aircraft_carrier"] %>
+          <option value="aircraft_carrier">Aircraft Carrier (length: 5)</option>
+        <% end %>
+        <% unless session["battleship"] %>
+          <option value="battleship">Battleship (length: 4)</option>
+        <% end %>
+        <% unless session["destroyer"] %>
+          <option value="destroyer">Destroyer (length: 3)</option>
+        <% end %>
+        <% unless session["submarine"] %>
+          <option value="submarine">Submarine (length: 3)</option>
+        <% end %>
+        <% unless session["patrol_boat"] %>
+          <option value="patrol_boat">Patrol Boat (length: 2)</option>
+        <% end %>
       </select>
     <label for="column">Column</label>
       <select id="column" name="column">
