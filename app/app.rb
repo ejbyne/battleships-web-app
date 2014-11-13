@@ -26,9 +26,9 @@ class BattleShips < Sinatra::Base
     @player = Player.new
     @player.name = params[:player_name]
     GAME.add_player(@player)
-    board = Board.new
+    @board = Board.new
     session[:me] = @player.object_id
-    GAME.select_player_by_id(session[:me]).board = board
+    GAME.select_player_by_id(session[:me]).board = @board
     redirect '/place_ships'
   end
 
@@ -43,15 +43,15 @@ class BattleShips < Sinatra::Base
   end
 
   post '/place_ships' do
-    @board = GAME.select_player_by_id(session[:me]).board
-    ship_choice = params[:ship]
-    ship = Ship.aircraft_carrier if ship_choice == "aircraft_carrier"
-    ship = Ship.battleship if ship_choice == "battleship"
-    ship = Ship.destroyer if ship_choice == "destroyer"
-    ship = Ship.submarine if ship_choice == "submarine"
-    ship = Ship.patrol_boat if ship_choice == "patrol_boat"
-    @board.place(ship, (params[:column] + params[:row]).to_s, params[:orientation])
-    redirect '/place_ships'
+      @board = GAME.select_player_by_id(session[:me]).board
+      ship_choice = params[:ship]
+      ship = Ship.aircraft_carrier if ship_choice == "aircraft_carrier"
+      ship = Ship.battleship if ship_choice == "battleship"
+      ship = Ship.destroyer if ship_choice == "destroyer"
+      ship = Ship.submarine if ship_choice == "submarine"
+      ship = Ship.patrol_boat if ship_choice == "patrol_boat"
+      @board.place(ship, (params[:column] + params[:row]).to_s, params[:orientation])
+      redirect '/place_ships'
   end
 
   get '/waiting' do
@@ -61,6 +61,10 @@ class BattleShips < Sinatra::Base
 
   get '/game' do
     erb :game
+  end
+
+  get '/reset' do
+    GAME = Game.new
   end
 
   # start the server if ruby file executed directly

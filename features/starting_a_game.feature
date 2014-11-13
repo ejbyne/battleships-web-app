@@ -16,6 +16,12 @@ Scenario: Registering first player
 
 Scenario: Placing ships on the board
   Given I have registered
-  When I choose a ship placement
-  And I click "Place Ship"
+  And I choose a ship placement
+  When I click "Place Ship"
   Then I should see an updated board
+
+Scenario: Getting to the waiting page
+  Given I have registered
+  And I have placed all of my ships
+  When I click "Place Ship"
+  Then I should see "Waiting for second player..."

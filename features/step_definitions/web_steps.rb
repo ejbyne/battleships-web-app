@@ -25,17 +25,43 @@ Then(/^I should be asked to place my ships$/) do
 end
 
 Given(/^I have registered$/) do
+  visit '/reset'
   visit '/'
   step('I click "New Game"')
   step('I click "Register"')
 end
 
 When(/^I choose a ship placement$/) do
-  select('A', :from => 'row')
-  select('5', :from => 'column')
+  select('Aircraft Carrier', :from => 'ship')
+  select('5', :from => 'row')
+  select('A', :from => 'column')
   select('vertical', :from => 'orientation')
 end
 
 Then(/^I should see an updated board$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_content "Place your next ship..."
+end
+
+Given(/^I have placed all of my ships$/) do
+  step('I have registered')
+  select('Destroyer', :from => 'ship')
+  select('5', :from => 'row')
+  select('B', :from => 'column')
+  select('vertical', :from => 'orientation')
+  click_button('Place Ship')
+  select('Submarine', :from => 'ship')
+  select('5', :from => 'row')
+  select('C', :from => 'column')
+  select('vertical', :from => 'orientation')
+  click_button('Place Ship')
+  select('Battleship', :from => 'ship')
+  select('5', :from => 'row')
+  select('D', :from => 'column')
+  select('vertical', :from => 'orientation')
+  click_button('Place Ship')
+  select('Patrol Boat', :from => 'ship')
+  select('5', :from => 'row')
+  select('E', :from => 'column')
+  select('vertical', :from => 'orientation')
+  click_button('Place Ship')
 end
