@@ -6,17 +6,9 @@ class Board
   def initialize
     @grid = {}
     @coords = []
-    rows
-    columns
-    gridded
-  end
-
-  def columns
     @letters = [*'A'..'J']
-  end
-
-  def rows
     @numbers = [*1..10]
+    gridded
   end
 
   def setting_coordinates
@@ -39,15 +31,15 @@ class Board
   end
 
   def place(ship, coord, orientation)
-  coords = [coord]
-    ship.length.times{coords << next_coord(coords.last, orientation)}
-    coords.pop
-    raise_errors_if_cant_place_ship(coords)
-    coords.each{ |key| grid[key.to_sym].content = ship  }
+    selected_coords = [coord]
+    ship.length.times{selected_coords << next_coord(selected_coords.last, orientation)}
+    selected_coords.pop
+    raise_errors_if_cant_place_ship(selected_coords)
+    selected_coords.each{ |key| grid[key.to_sym].content = ship }
   end
 
   def ships
-    @grid.values.select{|cell| cell.content.is_a?(Ship)}.map(&:content).uniq
+    @grid.values.select{|coord| is_a_ship?(coord)}.map(&:content).uniq
   end
 
   def ship_count
@@ -62,33 +54,31 @@ class Board
     coords.include?(coord)
   end
 
-  def already_hit(coord)
-    raise "You cannot hit the same square twice" if  grid[coord.to_s].hit?
+  def already_shot_at(coord)
+    grid[coord.to_sym].shot_at?
   end
 
   def shoot(coord)
-    if coord_in_grid(coord)
-      if !already_hit(coord)
-        grid[coord.to_sym] = hit!
-      end
-    end
+    raise "No such coordinate" if !coord_in_grid(coord)
+    raise "Already hit" if already_shot_at(coord)
+    grid[coord.to_sym].hit!
   end
 
-  def is_a_ship?(cell)
-    cell.content.respond_to?(:sunk?) 
+  def is_a_ship?(coord)
+    coord.content.respond_to?(:sunk?) 
   end
 
-  # def any_coord_not_on_grid?(coords)
-  #   (grid.keys & coords) != coords
-  # end
-
-  def any_coord_is_already_a_ship?(coords)
-    coords.any?{|coord| is_a_ship?(grid[coord.to_sym])}
+  def any_coord_not_on_grid?(selected_coords)
+    (coords & selected_coords) != selected_coords
   end
 
-  def raise_errors_if_cant_place_ship(coords)
-    # raise "You cannot place a ship outside of the grid" if any_coord_not_on_grid?(coords)
-    raise "You cannot place a ship on another ship" if any_coord_is_already_a_ship?(coords)
+  def any_coord_is_already_a_ship?(selected_coords)
+    selected_coords.any? {|coord| is_a_ship?(grid[coord.to_sym])}
+  end
+
+  def raise_errors_if_cant_place_ship(selected_coords)
+    raise "You cannot place a ship outside of the grid" if any_coord_not_on_grid?(selected_coords)
+    raise "You cannot place a ship on another ship" if any_coord_is_already_a_ship?(selected_coords)
   end
 
 end

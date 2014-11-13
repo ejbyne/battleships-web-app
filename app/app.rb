@@ -50,7 +50,7 @@ class BattleShips < Sinatra::Base
       ship = Ship.destroyer if ship_choice == "destroyer"
       ship = Ship.submarine if ship_choice == "submarine"
       ship = Ship.patrol_boat if ship_choice == "patrol_boat"
-      @board.place(ship, (params[:column] + params[:row]).to_s, params[:orientation])
+      @board.place(ship, (params[:column] + params[:row]), params[:orientation])
       redirect '/place_ships'
   end
 
@@ -75,6 +75,7 @@ class BattleShips < Sinatra::Base
     @other_player = GAME.select_other_player_by_id(session[:me])
     @other_board = @other_player.board
     @other_board.shoot(params[:column] + params[:row])
+    GAME.switch_turn
     redirect '/game'
   end
 

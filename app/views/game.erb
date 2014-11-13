@@ -1,3 +1,9 @@
+<head>
+  <% if GAME.whose_turn == @other_player %>
+    <meta http-equiv="refresh" content="5" >
+  <% end %>
+</head>
+
 <h1>Battleships!</h1>
 
 <table border=1 width=400>
@@ -15,10 +21,15 @@
   <tr>
     <th><%= number %></th>
       <% row.each do |coord| %>
-        <% if coord.content.is_a?(Ship) and coord.content.hit? then %> <td bgcolor="red"></td> <% end %>
-        <% if coord.content.is_a?(Ship) then %> <td bgcolor="grey"></td> <% end %>
-        <% if coord.content.is_a?(Water) and coord.content.hit? then %> <td bgcolor="yellow"></td> <% end %>
-        <% if coord.content.is_a?(Water) then %> <td bgcolor="blue"></td> <% end %>  
+        <% if coord.content.is_a?(Ship) and coord.shot_at? %>
+          <td bgcolor="red"></td>
+        <% elsif coord.content.is_a?(Ship) %> 
+          <td bgcolor="grey"></td>
+        <% elsif coord.content.is_a?(Water) and coord.shot_at? %> 
+          <td bgcolor="yellow"></td>
+        <% else %> 
+          <td bgcolor="blue"></td>
+        <% end %>
       <% end %>
     <% number = number.next %>
   </tr>
@@ -40,44 +51,51 @@
   <tr>
     <th><%= number %></th>
       <% row.each do |coord| %>
-        <% if coord.content.is_a?(Ship) and coord.content.hit? then %> <td bgcolor="red"></td> <% end %>
-        <% if coord.content.is_a?(Ship) then %> <td bgcolor="blue"></td> <% end %>
-        <% if coord.content.is_a?(Water) and coord.content.hit? then %> <td bgcolor="yellow"></td> <% end %>
-        <% if coord.content.is_a?(Water) then %> <td bgcolor="blue"></td> <% end %>  
+        <% if coord.content.is_a?(Ship) and coord.shot_at? %>
+          <td bgcolor="red"></td>
+        <% elsif coord.content.is_a?(Ship) %>
+          <td bgcolor="blue"></td>
+        <% elsif coord.content.is_a?(Water) and coord.shot_at? %>
+          <td bgcolor="yellow"></td>
+        <% else %>
+          <td bgcolor="blue"></td>
+        <% end %>
       <% end %>
     <% number = number.next %>
   </tr>
   <% end %>
 </table>
 
-<h2>Select your firing co-ordinate</h2>
-  <form action='/game' method='post'>
-    <label for="column">Column</label>
-      <select id="column" name="column">
-        <option value="A">A</option>
-        <option value="B">B</option>
-        <option value="C">C</option>
-        <option value="D">D</option>
-        <option value="E">E</option>
-        <option value="F">F</option>
-        <option value="G">G</option>
-        <option value="H">H</option>
-        <option value="I">I</option>
-        <option value="J">J</option>
-      </select>
-    <label for="row">Row</label>
-      <select id="row" name="row">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-      </select>
-    <input type='submit' value="Fire!">
-  </form>
+<% if GAME.whose_turn == @player %>
+  <h2>Select your firing co-ordinate</h2>
+    <form action='/game' method='post'>
+      <label for="column">Column</label>
+        <select id="column" name="column">
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+          <option value="E">E</option>
+          <option value="F">F</option>
+          <option value="G">G</option>
+          <option value="H">H</option>
+          <option value="I">I</option>
+          <option value="J">J</option>
+        </select>
+      <label for="row">Row</label>
+        <select id="row" name="row">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+      <input type='submit' value="Fire!">
+    </form>
+<% end %>
 
