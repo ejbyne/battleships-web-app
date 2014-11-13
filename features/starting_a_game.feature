@@ -23,5 +23,11 @@ Scenario: Placing ships on the board
 Scenario: Getting to the waiting page
   Given I have registered
   And I have placed all of my ships
-  When I click "Place Ship"
   Then I should see "Waiting for second player..."
+
+Scenario: Both players ready
+  Given I have registered
+  And I have placed all of my ships
+  And another person has registered
+  When that person has placed all of his ships
+  Then I should see "Ready"
