@@ -12,14 +12,12 @@ Given(/^I visit the game page$/) do
     step('I click "New Game"')
     step('I click "Register"')
     step('I have placed all of my ships')
-    visit '/game'
   end
   in_browser(:two) do
     visit '/'
     step('another person has clicked "New Game"')
     step('another person has clicked "Register"')
     step('that person has placed all of his ships')
-    visit '/game'
   end
 end
 

@@ -60,14 +60,21 @@ class BattleShips < Sinatra::Base
   end
 
   get '/game' do
-    @player1 = GAME.select_player_by_id(session[:me])
-    @board1 = @player1.board
-    @grid1 = @board1.grid
-    @rows1 = @grid1.values.each_slice(10).to_a
-    @player2 = GAME.select_other_player_by_id(session[:me])
-    @board2 = @player2.board
-    @grid2 = @board2.grid
-    @rows2 = @grid2.values.each_slice(10).to_a
+    @player = GAME.select_player_by_id(session[:me])
+    @board = @player.board
+    @grid = @board.grid
+    @rows = @grid.values.each_slice(10).to_a
+    @other_player = GAME.select_other_player_by_id(session[:me])
+    @other_board = @other_player.board
+    @other_grid = @other_board.grid
+    @other_rows = @other_grid.values.each_slice(10).to_a
+    erb :game
+  end
+
+  post '/game' do
+    @other_player = GAME.select_other_player_by_id(session[:me])
+    @other_board = @other_player.board
+    @other_board.shoot((params[:column] + params[:row]).to_s)
     erb :game
   end
 
