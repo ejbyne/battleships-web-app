@@ -102,14 +102,67 @@ Given(/^I have placed all of my ships$/) do
   end
 end
 
-Given(/^another person has registered$/) do
-  pending # express the regexp above with the code you wish you had
+Given(/^another person has visited the homepage$/) do
+  in_browser(:two) do
+    visit '/'
+  end
+end
+
+When(/^another person has clicked "(.*?)"$/) do |arg1|
+  in_browser(:two) do
+    click_button(arg1)
+  end
+end
+
+When(/^another person has entered their name$/) do
+  in_browser(:two) do
+    fill_in 'player_name', :with => 'Sarah'
+  end
 end
 
 When(/^that person has placed all of his ships$/) do
-  pending # express the regexp above with the code you wish you had
+  in_browser(:two) do
+    select('Aircraft Carrier', :from => 'ship')
+    select('5', :from => 'row')
+    select('A', :from => 'column')
+    select('vertical', :from => 'orientation')
+    click_button('Place Ship')
+    select('Destroyer', :from => 'ship')
+    select('5', :from => 'row')
+    select('B', :from => 'column')
+    select('vertical', :from => 'orientation')
+    click_button('Place Ship')
+    select('Submarine', :from => 'ship')
+    select('5', :from => 'row')
+    select('C', :from => 'column')
+    select('vertical', :from => 'orientation')
+    click_button('Place Ship')
+    select('Battleship', :from => 'ship')
+    select('5', :from => 'row')
+    select('D', :from => 'column')
+    select('vertical', :from => 'orientation')
+    click_button('Place Ship')
+    select('Patrol Boat', :from => 'ship')
+    select('5', :from => 'row')
+    select('E', :from => 'column')
+    select('vertical', :from => 'orientation')
+    click_button('Place Ship')
+  end
 end
 
+Then(/^that person should see "(.*?)"$/) do |arg1|
+  in_browser(:two) do
+    expect(page).to have_content "Ready"
+  end
+end
 
+  # swap_sessions
+  # in_browser(:two) do
+  #   visit '/'
+  #   step('I click "New Game"')
+  #   fill_in 'player_name', :with => 'Sarah'
+  #   step('I click "Register"')
 
+  # end
+# end
 

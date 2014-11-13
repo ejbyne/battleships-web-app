@@ -28,6 +28,9 @@ Scenario: Getting to the waiting page
 Scenario: Both players ready
   Given I have registered
   And I have placed all of my ships
-  And another person has registered
+  And another person has visited the homepage
+  And another person has clicked "New Game"
+  And another person has entered their name
+  And another person has clicked "Register"
   When that person has placed all of his ships
-  Then I should see "Ready"
+  Then that person should see "Ready"
