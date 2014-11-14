@@ -46,8 +46,8 @@ class Board
     ships.count
   end
 
-  def floating_ships?
-    !ships.any?(&:sunk?)
+  def all_ships_sunk?
+    ships.all?(&:sunk?)
   end
 
   def coord_in_grid(coord)

@@ -74,6 +74,7 @@ class BattleShips < Sinatra::Base
   end
 
   post '/game' do
+    @player = GAME.select_player_by_id(session[:me])
     @other_player = GAME.select_other_player_by_id(session[:me])
     @other_board = @other_player.board
     @other_board.shoot(params[:column] + params[:row])
@@ -82,11 +83,18 @@ class BattleShips < Sinatra::Base
     else
       session[:hit?] = false
     end
-    GAME.switch_turn
-    redirect '/game'
+    if GAME.won?
+      session[:winner] = true 
+      redirect '/results'
+    else
+      GAME.switch_turn
+      redirect '/game'
+    end
+    
   end
 
   get '/results' do
+    @player = GAME.select_player_by_id(session[:me])
     erb :results
   end
 

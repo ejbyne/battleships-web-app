@@ -8,6 +8,11 @@ Scenario: Taking the first turn
   When I fire at the opponent's board
   Then I should see whether I have hit a ship or missed
 
+Scenario: Taking the second turn
+  Given I have taken my first turn
+  When the other player takes his turn
+  Then the other player should see whether he has hit a ship or missed
+
 Scenario: Winning
   Given I have sunk all of my opponent's ships
   Then I should see that I have won the game
