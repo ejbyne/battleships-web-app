@@ -76,6 +76,11 @@ class BattleShips < Sinatra::Base
     @other_player = GAME.select_other_player_by_id(session[:me])
     @other_board = @other_player.board
     @other_board.shoot(params[:column] + params[:row])
+    if @other_board.grid[(params[:column] + params[:row]).to_sym].content.is_a?(Ship)
+      session[:hit?] = true
+    else
+      session[:hit?] = false
+    end
     GAME.switch_turn
     redirect '/game'
   end

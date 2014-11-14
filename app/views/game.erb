@@ -36,6 +36,17 @@
   <% end %>
 </table>
 
+<% if GAME.whose_turn == @other_player %>
+  <% if session[:hit?] == true %>
+    <p>You have hit a ship!</p>
+  <% elsif session[:hit?] == false %>
+    <p>You missed</p>
+  <% else %>
+    <p></p>
+  <% end %>
+<% else %>
+<% end %>
+
 <table border=1 width=400>
   <tr>
   <tr><th colspan=11>Opponent's Board</th></tr>

@@ -22,11 +22,16 @@ Given(/^I visit the game page$/) do
 end
 
 When(/^I fire at the opponent's board$/) do
-  select('5', :from => 'row')
-  select('A', :from => 'column')
-  click_button('Fire!')
+  in_browser(:one) do
+    visit '/waiting'
+    select('5', :from => 'row')
+    select('A', :from => 'column')
+    click_button('Fire!')
+  end
 end
 
 Then(/^I should see whether I have hit a ship or missed$/) do
-  pending # express the regexp above with the code you wish you had
+  in_browser(:one) do
+    expect(page).to have_content('You have hit a ship!')
+  end
 end
