@@ -61,6 +61,7 @@ class BattleShips < Sinatra::Base
   end
 
   get '/game' do
+    redirect '/results' if GAME.won?
     @player = GAME.select_player_by_id(session[:me])
     @board = @player.board
     @grid = @board.grid
@@ -83,6 +84,10 @@ class BattleShips < Sinatra::Base
     end
     GAME.switch_turn
     redirect '/game'
+  end
+
+  get '/results' do
+    erb :results
   end
 
   get '/reset' do

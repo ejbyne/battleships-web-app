@@ -65,7 +65,7 @@ class Game
   end
 
   def won?
-    opponent.board.sunk?
+    opponent.board.floating_ships? == false
   end
 
 end

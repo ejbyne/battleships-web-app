@@ -35,3 +35,28 @@ Then(/^I should see whether I have hit a ship or missed$/) do
     expect(page).to have_content('You have hit a ship!')
   end
 end
+
+Given(/^I have sunk all of my opponent's ships$/) do
+  sink_all_opponents_ships
+end
+
+Then(/^I should see that I have won the game$/) do
+  in_browser(:one) do
+    visit '/game'
+    expect(page).to have_content('You have won!')
+  end
+end
+
+# Then(/^the other player should see that they have lost$/) do
+#   in_browser(:two) do
+#     # visit '/results'
+#     expect(page).to have 
+# end
+
+def sink_all_opponents_ships
+  in_browser(:one) do
+    Capybara.app::GAME.opponent.board.grid.each do |key, value|
+      value.content.hit! if value.content.is_a?(Ship)
+    end
+  end
+end
