@@ -4,11 +4,9 @@
   <% end %>
 </head>
 
-<h1>Battleships!</h1>
-
-<table border=1 width=400>
+<table class="grid">
   <tr>
-  <tr><th colspan=11>Your Board</th></tr>
+  <tr><th colspan=11><%= @player.name %>'s board</th></tr>
     <th></th>
     <% letter = "A" %>
     <% 10.times do %>
@@ -36,20 +34,9 @@
   <% end %>
 </table>
 
-<% if GAME.whose_turn == @other_player %>
-  <% if session[:hit?] == true %>
-    <p>You have hit a ship!</p>
-  <% elsif session[:hit?] == false %>
-    <p>You missed</p>
-  <% else %>
-    <p></p>
-  <% end %>
-<% else %>
-<% end %>
-
-<table border=1 width=400>
+<table class="grid">
   <tr>
-  <tr><th colspan=11>Opponent's Board</th></tr>
+  <tr><th colspan=11><%= @other_player.name %>'s Board</th></tr>
     <th></th>
     <% letter = "A" %>
     <% 10.times do %>
@@ -78,7 +65,8 @@
 </table>
 
 <% if GAME.whose_turn == @player %>
-  <h2>Select your firing co-ordinate</h2>
+  <div class="target_selection">
+  <h3>Select your firing co-ordinate</h2>
     <form action='/game' method='post'>
       <label for="column">Column</label>
         <select id="column" name="column">
@@ -108,5 +96,16 @@
         </select>
       <input type='submit' value="Fire!">
     </form>
+  </div>
+<% end %>
+
+<% if GAME.whose_turn == @other_player %>
+  <h3 class="hit_report">
+  <% if session[:hit?] == true %>
+    You have hit a ship!</br></br>
+  <% elsif session[:hit?] == false %>
+    You missed</br></br>
+  <% end %> 
+  Waiting for other player to fire</h3>
 <% end %>
 
