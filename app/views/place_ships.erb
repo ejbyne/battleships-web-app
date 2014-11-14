@@ -6,7 +6,7 @@
   <p>Place your next ship...</p>
 <% end %>
 
-<table border=1 width=400>
+<table class= "grid">
   <tr><th colspan=11>Your Board</th></tr>
   <tr>
     <th></th>
@@ -33,6 +33,7 @@
   <% end %>
 </table>
 
+<div class="ship_selection">
 <h2>Select your ship</h2>
   <form action='/place_ships' method='post'>
     <label for="ship">Ship</label>
@@ -86,6 +87,7 @@
     </select>
     <input type='submit' value="Place Ship">
   </form>
+</div>
 
      
 

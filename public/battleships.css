@@ -32,3 +32,32 @@ section {
   background-repeat: no-repeat;
   background-size: 100%;
 }
+
+.ship_selection {
+  float: left;
+  margin-left: 30px;
+  background-color: white;
+  width: 650px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  border-radius: 15px;
+  background-color: #E8E8E8;
+}
+
+.grid {
+  float: left;
+  background-color: #E8E8E8;
+  border-radius: 15px;
+  padding-left: 20px;
+  padding-right: 30px;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+
+tr {
+  height: 25px;
+}
+
+td {
+  width: 25px;
+}

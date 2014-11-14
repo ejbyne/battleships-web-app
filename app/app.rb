@@ -39,7 +39,7 @@ class BattleShips < Sinatra::Base
     redirect '/waiting' if @board.ship_count == 5
     @grid = @board.grid
     @rows = @grid.values.each_slice(10).to_a
-    erb :place_ships, :layout => :game_layout
+    erb :place_ships
   end
 
   post '/place_ships' do
