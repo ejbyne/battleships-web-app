@@ -9,12 +9,12 @@ require_relative '../lib/ship'
 class BattleShips < Sinatra::Base
 
   set :views, Proc.new { File.join(root, "views") }
+  set :public_folder, Proc.new { File.join(root, "..", "public") }
   enable :sessions
 
   GAME = Game.new
 
   get '/' do
-    
     erb :index 
   end
 
@@ -39,20 +39,20 @@ class BattleShips < Sinatra::Base
     redirect '/waiting' if @board.ship_count == 5
     @grid = @board.grid
     @rows = @grid.values.each_slice(10).to_a
-    erb :place_ships
+    erb :place_ships, :layout => :game_layout
   end
 
   post '/place_ships' do
-      @board = GAME.select_player_by_id(session[:me]).board
-      ship_choice = params[:ship]
-      session[ship_choice] = ship_choice
-      ship = Ship.aircraft_carrier if ship_choice == "aircraft_carrier"
-      ship = Ship.battleship if ship_choice == "battleship"
-      ship = Ship.destroyer if ship_choice == "destroyer"
-      ship = Ship.submarine if ship_choice == "submarine"
-      ship = Ship.patrol_boat if ship_choice == "patrol_boat"
-      @board.place(ship, (params[:column] + params[:row]), params[:orientation])
-      redirect '/place_ships'
+    @board = GAME.select_player_by_id(session[:me]).board
+    ship_choice = params[:ship]
+    session[ship_choice] = ship_choice
+    ship = Ship.aircraft_carrier if ship_choice == "aircraft_carrier"
+    ship = Ship.battleship if ship_choice == "battleship"
+    ship = Ship.destroyer if ship_choice == "destroyer"
+    ship = Ship.submarine if ship_choice == "submarine"
+    ship = Ship.patrol_boat if ship_choice == "patrol_boat"
+    @board.place(ship, (params[:column] + params[:row]), params[:orientation])
+    redirect '/place_ships'
   end
 
   get '/waiting' do
