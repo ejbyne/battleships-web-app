@@ -24,7 +24,7 @@ class Board
 
   def next_coord(coord, orientation)
     if orientation == 'vertical'
-      coord.next
+      coord[0] + coord[1].next
     elsif orientation == 'horizontal'
       coord.reverse.next.reverse
     end
@@ -32,8 +32,9 @@ class Board
 
   def place(ship, coord, orientation)
     selected_coords = [coord]
-    ship.length.times{selected_coords << next_coord(selected_coords.last, orientation)}
-    selected_coords.pop
+    length = ship.length
+    length -= 1
+    length.times{selected_coords << next_coord(selected_coords.last, orientation)}
     raise_errors_if_cant_place_ship(selected_coords)
     selected_coords.each{ |key| grid[key.to_sym].content = ship }
   end
