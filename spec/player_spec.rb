@@ -5,9 +5,13 @@ describe Player do
   let (:player) { Player.new }
   let (:board) { double :board }
 
+  it 'should initialize without a board' do
+    expect(player.board?).to be false
+  end
+
   it 'should know if it has a board' do
     player.board = board
-    expect(player.board).to be true
+    expect(player.board?).to be true
   end
 
   it 'should shoot at the board' do

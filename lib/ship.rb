@@ -15,19 +15,18 @@ class Ship
   def hit!
     @hit = true
     @number_of_hits += 1
-    self
   end
 
   def sunk?
     @number_of_hits == @length
   end
 
-  def self.battleship
-    new 4
-  end
-
   def self.aircraft_carrier
     new 5
+  end
+
+  def self.battleship
+    new 4
   end
 
   def self.destroyer

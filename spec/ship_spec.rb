@@ -9,7 +9,8 @@ describe Ship do
   end
 
   it 'can be hit' do
-    expect(ship.hit!).to be_hit
+    ship.hit!
+    expect(ship).to be_hit
   end
 
   it 'is not sunk unless hit a number of times equal to its length' do
@@ -22,14 +23,14 @@ describe Ship do
     expect(ship).to be_sunk
   end
 
-  it 'can create a battleship' do
-    battleship = Ship.battleship
-    expect(battleship.length).to eq(4)
-  end
-
   it 'can create an aircraft carrier' do
     aircraft_carrier = Ship.aircraft_carrier
     expect(aircraft_carrier.length).to eq(5)
+  end
+
+  it 'can create a battleship' do
+    battleship = Ship.battleship
+    expect(battleship.length).to eq(4)
   end
 
   it 'can create a destroyer' do
@@ -37,14 +38,14 @@ describe Ship do
     expect(destroyer.length).to eq(3)
   end
 
-  it 'can create a patrol boat' do
-    patrol_boat = Ship.patrol_boat
-    expect(patrol_boat.length).to eq(2)
-  end
-
   it 'can create a submarine' do
     submarine = Ship.submarine
     expect(submarine.length).to eq(3)
+  end
+
+  it 'can create a patrol boat' do
+    patrol_boat = Ship.patrol_boat
+    expect(patrol_boat.length).to eq(2)
   end
 
 end

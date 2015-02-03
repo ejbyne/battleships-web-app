@@ -9,7 +9,8 @@ describe Water do
   end
 
   it 'can be hit' do
-    expect(water.hit!).to be_hit
+  	water.hit!
+    expect(water).to be_hit
   end
   
 end
