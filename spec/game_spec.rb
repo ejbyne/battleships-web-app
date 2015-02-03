@@ -8,7 +8,7 @@ describe Game do
   let(:board)   { double :board, ship_count: 5 }
   let(:board2)  { double :board, ship_count: 5 }
 
-  context 'Adding players' do
+  context 'adding players' do
 
     it 'starts without players' do
       expect(game.players.count).to eq(0)
@@ -34,7 +34,7 @@ describe Game do
 
   end
 
-  context 'Identifying players by id' do
+  context 'identifying players by id' do
 
     before do
       game.add_player(player1)
@@ -51,7 +51,7 @@ describe Game do
 
   end
 
-  context 'Taking turns' do
+  context 'taking turns' do
 
     before do
       game.add_player(player1)
@@ -87,7 +87,7 @@ describe Game do
 
   end
 
-  context 'Game ready?' do
+  context 'game ready?' do
 
     before do
       game.add_player(player1)
