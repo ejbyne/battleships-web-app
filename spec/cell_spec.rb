@@ -1,4 +1,4 @@
-require './lib/cell'
+require 'cell'
 
 describe Cell do
 
@@ -9,9 +9,14 @@ describe Cell do
     expect(cell.content).to be(water)
   end
 
-  it 'can be hit' do
-    expect(cell).to receive(:hit!)
+  it 'will allow its content to be hit' do
+    expect(water).to receive(:hit!)
     cell.hit!
+  end
+
+  it 'knows if its content has been hit' do
+    expect(water).to receive(:hit?)
+    cell.hit?
   end
 
   it 'knows when it has been shot at' do
@@ -22,16 +27,6 @@ describe Cell do
 
   it 'knows if it has not been shot at' do
     expect(cell).not_to be_shot_at
-  end
-
-  it 'knows if its content has been hit' do
-    expect(water).to receive(:hit?)
-    cell.hit?
-  end
-
-  it 'will allow its content to be hit' do
-    expect(water).to receive(:hit!)
-    cell.hit!
   end
 
 end

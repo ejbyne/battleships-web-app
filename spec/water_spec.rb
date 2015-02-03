@@ -1,4 +1,4 @@
-require './lib/water'
+require 'water'
 
 describe Water do
 

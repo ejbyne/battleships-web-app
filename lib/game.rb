@@ -12,17 +12,11 @@ class Game
 	end
 
   def select_player_by_id(id)
-    select_player = @players.select do |player|
-      player.object_id == id
-    end
-    select_player[0]
+    @players.select { |player| player.object_id == id }.first
   end
 
   def select_other_player_by_id(id)
-    select_player = @players.reject do |player|
-      player.object_id == id
-    end
-    select_player[0]
+    @players.reject { |player| player.object_id == id }.first
   end
 
   def attacker
