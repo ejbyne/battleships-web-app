@@ -18,7 +18,7 @@ class Game
     select_player[0]
   end
 
-    def select_other_player_by_id(id)
+  def select_other_player_by_id(id)
     select_player = @players.reject do |player|
       player.object_id == id
     end
@@ -58,7 +58,7 @@ class Game
   end
 
   def fire_at(coordinates)
-    raise "not ready to play" unless ready?
+    raise "Not ready to play" unless ready?
     opponent.receive_shot(coordinates)
     raise "Winner!" if won?
     switch_turn
