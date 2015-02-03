@@ -2,8 +2,8 @@ require 'board'
 
 describe Board do
 
-	let(:board) 	{ Board.new }
-	let(:ship)    { double :ship, length: 3, sunk?: false }
+	let(:board) { Board.new }
+	let(:ship)  { double :ship, length: 3, sunk?: false }
 	
 	context 'creating the grid' do
 
@@ -53,7 +53,36 @@ describe Board do
 
 	context 'shooting at coords' do
 
+		it 'will allow a coordinate to be shot' do
+			expect(board.grid[:A1]).to receive(:hit!)
+			board.shoot('A1')
+		end
 
+		it 'will not allow a non-existent coordinate to be shot' do
+			expect { board.shoot('K1') }.to raise_error('No such coordinate')
+		end
+
+		it 'will not allow a coordinate to be shot at more than once' do
+			allow(board.grid[:A1]).to receive(:shot_at?).and_return(true)
+			expect { board.shoot('A1') }.to raise_error('Already hit')
+		end
+
+	context 'sinking ships' do
+
+		before do
+			board.place(ship, 'A1', 'horizontal')
+		end
+
+		it 'knows when the ships have not been sunk' do
+			expect(board.all_ships_sunk?).to be(false)
+		end
+
+		it 'knows when the ships have been sunk' do
+			allow(ship).to receive(:sunk?).and_return(true)
+			expect(board.all_ships_sunk?).to be(true)
+		end
+
+	end
 
 	end
 

@@ -1,7 +1,5 @@
 class Game
 
-  attr_reader :attacker, :opponent
-
   def players
     @players ||= []
   end
