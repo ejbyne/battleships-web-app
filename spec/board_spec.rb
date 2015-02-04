@@ -2,8 +2,11 @@ require 'board'
 
 describe Board do
 
-	let(:board) { Board.new }
-	let(:ship)  { double :ship, length: 3, sunk?: false }
+	let(:ship) { double :ship, length: 3, sunk?: false }
+	let(:cell) { double :cell, content: water, shot_at?: false }
+	let(:water) { double :water }
+	let(:cell_class) { double :cell_class, :new => cell }
+	let(:board) { Board.new(cell_class) }
 	
 	context 'creating the grid' do
 
@@ -17,8 +20,8 @@ describe Board do
 		end
 
 		it 'should have a cell object as the value of each coordinate' do
-			board.grid.values.each do |cell|
-				expect(cell).to be_an_instance_of(Cell)
+			board.grid.values.each do |value|
+				expect(value).to eq(cell)
 			end
 		end
 
@@ -27,17 +30,17 @@ describe Board do
 	context 'placing ships' do
 
 		it 'enables a ship to be placed horizontally' do
+			expect(board.grid[:A1]).to receive(:content=).with(ship)
+			expect(board.grid[:B1]).to receive(:content=).with(ship)
+			expect(board.grid[:C1]).to receive(:content=).with(ship)
 			board.place(ship, 'A1', 'horizontal')
-			expect(board.grid[:A1].content).to eq(ship)
-			expect(board.grid[:B1].content).to eq(ship)
-			expect(board.grid[:C1].content).to eq(ship)
 		end
 
 		it 'enables a ship to be placed vertically' do
+			expect(board.grid[:A1]).to receive(:content=).with(ship)
+			expect(board.grid[:A2]).to receive(:content=).with(ship)
+			expect(board.grid[:A3]).to receive(:content=).with(ship)
 			board.place(ship, 'A1', 'vertical')
-			expect(board.grid[:A1].content).to eq(ship)
-			expect(board.grid[:A2].content).to eq(ship)
-			expect(board.grid[:A3].content).to eq(ship)
 		end
 
 		it 'will not allow a ship to be placed outside the grid' do
@@ -45,7 +48,9 @@ describe Board do
 		end
 
 		it 'will not allow a ship to be placed over an existing ship' do
-			board.place(ship, 'A1', 'horizontal')
+			allow(board.grid[:A1]).to receive(:content).and_return(ship)
+			allow(board.grid[:B1]).to receive(:content).and_return(ship)
+			allow(board.grid[:C1]).to receive(:content).and_return(ship)
 			expect { board.place(ship, 'A1', 'horizontal') }.to raise_error('You cannot place a ship on another ship')
 		end
 
@@ -67,10 +72,18 @@ describe Board do
 			expect { board.shoot('A1') }.to raise_error('Already hit')
 		end
 
+	end
+
 	context 'sinking ships' do
 
 		before do
-			board.place(ship, 'A1', 'horizontal')
+			allow(board.grid[:A1]).to receive(:content).and_return(ship)
+			allow(board.grid[:B1]).to receive(:content).and_return(ship)
+			allow(board.grid[:C1]).to receive(:content).and_return(ship)
+		end
+
+		it 'knows how many ships there are' do
+			expect(board.ship_count).to eq(1)
 		end
 
 		it 'knows when the ships have not been sunk' do
@@ -81,8 +94,6 @@ describe Board do
 			allow(ship).to receive(:sunk?).and_return(true)
 			expect(board.all_ships_sunk?).to be(true)
 		end
-
-	end
 
 	end
 

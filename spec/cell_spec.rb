@@ -2,8 +2,9 @@ require 'cell'
 
 describe Cell do
 
-  let (:cell) { Cell.new(water) }
   let (:water) { double :water }
+  let (:water_class) { double :water_class, :new => water }
+  let (:cell) { Cell.new(water_class) }
 
   it 'has content' do
     expect(cell.content).to be(water)

@@ -3,9 +3,9 @@ require 'game'
 describe Game do
 
   let(:game)    { Game.new }
-  let(:player1) { double :player, board: board, board?: true, object_id: 1 }
+  let(:player1) { double :player, board: board1, board?: true, object_id: 1 }
   let(:player2) { double :player, board: board2, board?: true, object_id: 2 }
-  let(:board)   { double :board, ship_count: 5 }
+  let(:board1)   { double :board, ship_count: 5 }
   let(:board2)  { double :board, ship_count: 5 }
 
   context 'adding players' do
@@ -62,11 +62,6 @@ describe Game do
       expect(game.whose_turn).to be(player1)
     end
 
-    it 'switches turns' do
-      game.switch_turn
-      expect(game.whose_turn).to be(player2)
-    end
-
     it 'switches turns after a player fires' do
       allow(player2).to receive(:receive_shot)
       allow(board2).to receive(:all_ships_sunk?).and_return false
@@ -92,24 +87,6 @@ describe Game do
     before do
       game.add_player(player1)
       game.add_player(player2)
-    end
-
-    it 'receives a shot' do
-      expect(player2).to receive(:receive_shot)
-      allow(board2).to receive(:all_ships_sunk?).and_return false
-      game.fire_at(:B1)
-    end
-
-    it 'knows that there are two players' do
-      expect(game).to have_players
-    end
-
-    it 'knows if the players have boards' do
-      expect(game).to have_boards
-    end
-
-    it 'knows if the players have ships' do
-      expect(game).to have_ships
     end
 
     it 'knows if the game is ready' do

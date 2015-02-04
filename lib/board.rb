@@ -2,19 +2,11 @@ class Board
 
   attr_reader :grid
 
-  def initialize
+  def initialize(cell_class)
     @grid = {}
-    create_grid
+    create_grid(cell_class)
   end
-
-  def create_grid
-    numbers = [*1..10]
-    letters = [*'A'..'J']
-    numbers.each do |number|
-      letters.each { |letter| @grid[(letter + number.to_s).to_sym] = Cell.new(Water.new) }
-    end
-  end
-
+  
   def place(ship, coord, orientation)
     selected_coords = [coord]
     (ship.length-1).times { selected_coords << next_coord(selected_coords.last, orientation) }
@@ -22,12 +14,10 @@ class Board
     selected_coords.each { |coord| @grid[coord.to_sym].content = ship }
   end
 
-  def next_coord(coord, orientation)
-  	orientation == 'vertical' ? coord.next : coord.reverse.next.reverse
-  end
-
-  def ships
-    @grid.values.select { |cell| is_a_ship?(cell) }.map(&:content).uniq
+  def shoot(coord)
+    raise "No such coordinate" if any_coord_not_on_grid?([coord])
+    raise "Already hit" if already_shot_at(coord)
+    @grid[coord.to_sym].hit!
   end
 
   def ship_count
@@ -38,18 +28,28 @@ class Board
     ships.all?(&:sunk?)
   end
 
-  def already_shot_at(coord)
-    @grid[coord.to_sym].shot_at?
+private
+
+  def create_grid(cell_class)
+    (1..10).each do |number|
+    	('A'..'J').each { |letter| @grid[(letter + number.to_s).to_sym] = cell_class.new }
+    end
   end
 
-  def shoot(coord)
-    raise "No such coordinate" if any_coord_not_on_grid?([coord])
-    raise "Already hit" if already_shot_at(coord)
-    @grid[coord.to_sym].hit!
+  def next_coord(coord, orientation)
+  	orientation == 'vertical' ? coord.next : coord.reverse.next.reverse
+  end
+
+  def ships
+    @grid.values.select { |cell| is_a_ship?(cell) }.map(&:content).uniq
   end
 
   def is_a_ship?(cell)
     cell.content.respond_to?(:sunk?)
+  end
+
+  def already_shot_at(coord)
+    @grid[coord.to_sym].shot_at?
   end
 
   def any_coord_not_on_grid?(selected_coords)

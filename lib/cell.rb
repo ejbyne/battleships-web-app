@@ -2,8 +2,8 @@ class Cell
 
   attr_accessor :content
 
-  def initialize(content)
-    @content = content
+  def initialize(water_class)
+    @content = water_class.new
     @shot_at = false
   end
 

@@ -17,6 +17,27 @@ class Game
     @players.reject { |player| player.object_id == id }.first
   end
 
+  def ready?
+    has_players? and has_boards? and has_ships?
+  end
+
+  def whose_turn
+    attacker
+  end
+
+  def fire_at(coordinates)
+    raise "Not ready to play" unless ready?
+    opponent.receive_shot(coordinates)
+    raise "Winner!" if won?
+    switch_turn
+  end
+
+  def won?
+    opponent.board.all_ships_sunk?
+  end
+
+private
+
   def attacker
     players[0]
   end
@@ -37,27 +58,8 @@ class Game
     attacker.board.ship_count == 5 and opponent.board.ship_count == 5
   end
 
-  def ready?
-    has_players? and has_boards? and has_ships?
-  end
-
   def switch_turn
     players.rotate!
-  end
-
-  def whose_turn
-    attacker
-  end
-
-  def fire_at(coordinates)
-    raise "Not ready to play" unless ready?
-    opponent.receive_shot(coordinates)
-    raise "Winner!" if won?
-    switch_turn
-  end
-
-  def won?
-    opponent.board.all_ships_sunk?
   end
 
 end
