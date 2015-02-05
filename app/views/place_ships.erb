@@ -1,6 +1,6 @@
 <h2>Hello, <%= @player.name %></h2>
 
-<% if @board.ship_count == 0 %>
+<% if @player.board.ship_count == 0 %>
   <p>Please enter the first coordinates and orientations of your ships</p>
 <% else %>
   <p>Place your next ship...</p>
@@ -15,14 +15,13 @@
       <th><%= letter %></th>
       <% letter = letter.next %>
     <% end %>
-
   </tr>
   <% number = "1" %>
   <% @rows.each do |row| %>
   <tr>
     <th><%= number %></th>
-      <% row.each do |coord| %>
-        <% if coord.content.is_a?(Ship) %>
+      <% row.each do |cell| %>
+        <% if cell.content.is_a?(Ship) %>
           <td bgcolor="grey"></td>
         <% else %>
           <td bgcolor="blue"></td>
@@ -87,7 +86,7 @@
     </select>
     <input type='submit' value="Place Ship">
   </form>
+  <% if flash[:notice] %>
+    <p><%= flash[:notice] %></p>
+  <% end %>
 </div>
-
-     
-

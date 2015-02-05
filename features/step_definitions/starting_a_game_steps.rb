@@ -5,10 +5,6 @@ def in_browser(name)
   Capybara.session_name = old_session
 end
 
-# def swap_sessions
-#   Capybara.current_driver = Capybara.current_driver == :selenium ? :rack_test : :selenium
-# end
-
 Given(/^I visit the homepage$/) do
   in_browser(:one) do
     visit '/reset'
@@ -156,14 +152,3 @@ Then(/^that person should see "(.*?)"$/) do |arg1|
     expect(page).to have_content(arg1)
   end
 end
-
-  # swap_sessions
-  # in_browser(:two) do
-  #   visit '/'
-  #   step('I click "New Game"')
-  #   fill_in 'player_name', :with => 'Sarah'
-  #   step('I click "Register"')
-
-  # end
-# end
-

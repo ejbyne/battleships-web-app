@@ -2,9 +2,9 @@ class Board
 
   attr_reader :grid
 
-  def initialize(cell_class)
+  def initialize(cell_class, water_class)
     @grid = {}
-    create_grid(cell_class)
+    create_grid(cell_class, water_class)
   end
   
   def place(ship, coord, orientation)
@@ -30,9 +30,9 @@ class Board
 
 private
 
-  def create_grid(cell_class)
+  def create_grid(cell_class, water_class)
     (1..10).each do |number|
-    	('A'..'J').each { |letter| @grid[(letter + number.to_s).to_sym] = cell_class.new }
+    	('A'..'J').each { |letter| @grid[(letter + number.to_s).to_sym] = cell_class.new(water_class) }
     end
   end
 

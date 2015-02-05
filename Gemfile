@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'sinatra'
+gem 'rack-flash3'
 
 group :development, :test do
   gem 'cucumber'
@@ -8,4 +9,3 @@ group :development, :test do
   gem 'rspec'
   gem 'selenium-webdriver'
 end
-

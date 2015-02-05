@@ -36,8 +36,6 @@ class Game
     opponent.board.all_ships_sunk?
   end
 
-private
-
   def attacker
     players[0]
   end
@@ -45,6 +43,8 @@ private
   def opponent
     players[1]
   end
+
+private
 
   def has_players?
     players.count == 2

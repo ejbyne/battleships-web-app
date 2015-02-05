@@ -1,16 +1,24 @@
+body {
+  width: 100%;
+  height: 100%;
+  background-image: url("Tomahawk launch.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
 h1 {
-    font-family: Helvetica, Arial, sans-serif;
-    color: #303030;
-    font-size: 120px;
-    text-align: left;
-    position: relative;
-    top: -15px;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #303030;
+  font-size: 120px;
+  text-align: left;
+  position: relative;
+  /*top: -15px;*/
 }
 
 h2 {
-    font-family: Helvetica, Arial, sans-serif;
-    color: #303030;
-    font-size: 30px
+  font-family: Helvetica, Arial, sans-serif;
+  color: #303030;
+  font-size: 30px
 }
 
 section {
@@ -21,23 +29,11 @@ section {
   margin-left: 10px;
 }
 
-.wrapper {
-  position: relative;
-  top: -70px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 1250px;
-  height: 700px;
-  background-image: url("Tomahawk launch.jpg");
-  background-repeat: no-repeat;
-  background-size: 100%;
-}
-
 .ship_selection {
   float: left;
   margin-left: 30px;
   background-color: white;
-  width: 630px;
+  width: 650px;
   padding-bottom: 20px;
   padding-left: 20px;
   border-radius: 15px;

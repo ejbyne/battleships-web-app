@@ -6,7 +6,8 @@ describe Board do
 	let(:cell) { double :cell, content: water, shot_at?: false }
 	let(:water) { double :water }
 	let(:cell_class) { double :cell_class, :new => cell }
-	let(:board) { Board.new(cell_class) }
+	let(:water_class) { double :water_class }
+	let(:board) { Board.new(cell_class, water_class) }
 	
 	context 'creating the grid' do
 

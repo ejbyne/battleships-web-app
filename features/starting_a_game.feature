@@ -33,4 +33,4 @@ Scenario: Both players ready
   And another person has entered their name
   And another person has clicked "Register"
   When that person has placed all of his ships
-  Then that person should see "Battleships!"
+  Then that person should see "Sarah's board"
