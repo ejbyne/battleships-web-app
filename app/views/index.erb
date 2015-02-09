@@ -3,3 +3,7 @@
 <form action="/registration" method="post">
   <input type="submit" value="New Game">
 </form>
+
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>

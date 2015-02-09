@@ -1,7 +1,10 @@
 class BattleShips < Sinatra::Base
 
   error do
-    if invalid_placement
+    if already_two_players
+      flash[:notice] = env['sinatra.error'].message
+      redirect '/'
+    elsif invalid_placement
       flash[:notice] = env['sinatra.error'].message
       redirect '/place_ships'
     elsif invalid_shot
@@ -11,6 +14,10 @@ class BattleShips < Sinatra::Base
       session[:winner] = true
       redirect '/results'
     end
+  end
+
+  def already_two_players
+    env['sinatra.error'].message == "The game already has two players"
   end
 
   def invalid_placement

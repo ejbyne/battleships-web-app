@@ -1,0 +1,82 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-image: url("/images/tomahawk.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+h1 {
+  font-family: Helvetica, Arial, sans-serif;
+  color: #303030;
+  font-size: 120px;
+  text-align: left;
+  position: relative;
+  top: -50px;
+}
+
+h2 {
+  font-family: Helvetica, Arial, sans-serif;
+  color: #303030;
+  font-size: 30px
+}
+
+section {
+  font-family: Helvetica, Arial, sans-serif;
+  color: #303030;
+  position: relative;
+  top: -120px;
+  margin-left: 10px;
+}
+
+.ship_selection {
+  float: left;
+  margin-left: 30px;
+  background-color: white;
+  width: 400px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  border-radius: 15px;
+  background-color: #E8E8E8;
+}
+
+.target_selection {
+  float: left;
+  margin-left: 10px;
+  background-color: #E8E8E8;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.grid {
+  float: left;
+  background-color: #E8E8E8;
+  border-radius: 15px;
+  padding-left: 20px;
+  padding-right: 30px;
+  padding-bottom: 20px;
+  padding-top: 10px;
+  margin-left: 10px;
+}
+
+.hit_report {
+  float: left;
+  background-color: #E8E8E8;
+  border-radius: 15px;
+  padding-left: 20px;
+  padding-right: 30px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  margin-left: 10px;
+}
+
+tr {
+  height: 25px;
+}
+
+td {
+  width: 25px;
+}
