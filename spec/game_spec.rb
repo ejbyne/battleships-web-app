@@ -1,4 +1,4 @@
-require 'game'
+require_relative '../app/models/game'
 
 describe Game do
 

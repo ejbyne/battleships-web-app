@@ -1,4 +1,4 @@
-require 'cell'
+require_relative '../app/models/cell'
 
 describe Cell do
 

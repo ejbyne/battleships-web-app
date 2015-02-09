@@ -1,4 +1,4 @@
-require 'ship'
+require_relative '../app/models/ship'
 
 describe Ship do
   

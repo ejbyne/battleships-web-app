@@ -1,4 +1,4 @@
-require 'water'
+require_relative '../app/models/water'
 
 describe Water do
 

@@ -1,4 +1,4 @@
-require 'board'
+require_relative '../app/models/board'
 
 describe Board do
 
