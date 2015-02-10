@@ -6,6 +6,8 @@ In Weeks 2 and 3 at Makers Academy I built a Battleships web application with my
 
 Week 2 was spent developing the game logic in Ruby, with a focus on object oriented programming. In Week 3 we learnt how to use the Sinatra web framework, and used behaviour driven development to create a fully functional web game.
 
+This was a really exciting project, as after many weeks of learning to code it was the first time we managed to integrate our own code into a web framework and see a visible product in a browser window.
+
 ## Technologies used
 
 - Ruby
