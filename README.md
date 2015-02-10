@@ -48,6 +48,10 @@ $ rspec
 $ cucumber
 ```
 
+## Screenshot
+
+<img src="images/battleships-screenshot.png">
+
 ## Completed tasks
 
 ### Game logic
