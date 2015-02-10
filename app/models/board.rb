@@ -28,6 +28,10 @@ class Board
     ships.all?(&:sunk?)
   end
 
+  def convert_grid_values_to_rows
+    @grid.values.each_slice(10).to_a
+  end
+
 private
 
   def create_grid(cell_class, water_class)

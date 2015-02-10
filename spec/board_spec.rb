@@ -26,6 +26,12 @@ describe Board do
 			end
 		end
 
+		it 'can turn the values of the grid into 10 rows of 10' do
+			rows = board.convert_grid_values_to_rows
+			expect(rows.length).to eq(10)
+			expect(rows[0].length).to eq(10)
+		end
+
 	end
 
 	context 'placing ships' do

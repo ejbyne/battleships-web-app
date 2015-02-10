@@ -22,9 +22,9 @@
     <th><%= number %></th>
       <% row.each do |cell| %>
         <% if cell.content.is_a?(Ship) %>
-          <td bgcolor="grey"></td>
+          <td bgcolor="#C0C0C0"></td>
         <% else %>
-          <td bgcolor="blue"></td>
+          <td bgcolor="#0000FF"></td>
         <% end %>  
       <% end %>
     <% number = number.next %>

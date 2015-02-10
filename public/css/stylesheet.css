@@ -47,6 +47,7 @@ section {
 .target_selection {
   float: left;
   margin-left: 10px;
+  margin-top: 10px;
   background-color: #E8E8E8;
   padding: 20px;
   border-radius: 15px;

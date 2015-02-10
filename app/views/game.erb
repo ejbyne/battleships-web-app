@@ -20,13 +20,13 @@
     <th><%= number %></th>
       <% row.each do |coord| %>
         <% if coord.content.is_a?(Ship) and coord.shot_at? %>
-          <td bgcolor="red"></td>
+          <td bgcolor="#FF0000"></td>
         <% elsif coord.content.is_a?(Ship) %> 
-          <td bgcolor="grey"></td>
+          <td bgcolor="#C0C0C0"></td>
         <% elsif coord.content.is_a?(Water) and coord.shot_at? %> 
-          <td bgcolor="yellow"></td>
+          <td bgcolor="#FFFF00"></td>
         <% else %> 
-          <td bgcolor="blue"></td>
+          <td bgcolor="#0000FF"></td>
         <% end %>
       <% end %>
     <% number = number.next %>
@@ -50,13 +50,13 @@
     <th><%= number %></th>
       <% row.each do |coord| %>
         <% if coord.content.is_a?(Ship) and coord.shot_at? %>
-          <td bgcolor="red"></td>
+          <td bgcolor="#FF0000"></td>
         <% elsif coord.content.is_a?(Ship) %>
-          <td bgcolor="blue"></td>
+          <td bgcolor="#0000FF"></td>
         <% elsif coord.content.is_a?(Water) and coord.shot_at? %>
-          <td bgcolor="yellow"></td>
+          <td bgcolor="#FFFF00"></td>
         <% else %>
-          <td bgcolor="blue"></td>
+          <td bgcolor="#0000FF"></td>
         <% end %>
       <% end %>
     <% number = number.next %>
