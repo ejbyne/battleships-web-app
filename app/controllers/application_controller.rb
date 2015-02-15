@@ -11,15 +11,11 @@ class BattleShips < Sinatra::Base
 
   error do
     flash[:notice] = env['sinatra.error'].message
-    if already_two_players
-      redirect '/'
-    elsif invalid_placement
-      redirect '/place_ships'
-    elsif invalid_shot
-      redirect '/game'
-    elsif winner
-      session[:winner] = true
-      redirect '/results'
+    redirect '/' if already_two_players
+    redirect '/place_ships' if invalid_placement
+    redirect '/game' if invalid_shot
+    session[:winner] = true if winner
+    redirect '/results' if winner
     end
   end
 
