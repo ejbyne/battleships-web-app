@@ -1,5 +1,5 @@
 <head>
-  <% if GAME.whose_turn == other_player %>
+  <% if other_players_turn %>
     <meta http-equiv="refresh" content="5" >
   <% end %>
 </head>
@@ -64,7 +64,7 @@
   <% end %>
 </table>
 
-<% if GAME.whose_turn == player %>
+<% if players_turn %>
   <div class="target_selection">
   <h3>Select your firing co-ordinate</h2>
     <form action='/game' method='post'>
@@ -102,7 +102,7 @@
   </div>
 <% end %>
 
-<% if GAME.whose_turn == other_player %>
+<% if other_players_turn %>
   <h3 class="hit_report">
   <% if session[:hit?] == true %>
     You have hit a ship!</br></br>

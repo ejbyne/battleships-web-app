@@ -1,5 +1,13 @@
 class BattleShips < Sinatra::Base
 
+  def players_turn
+    GAME.whose_turn == player
+  end
+
+  def other_players_turn
+    GAME.whose_turn == other_player
+  end
+
   def fire_shot
     GAME.fire_at(params[:column] + params[:row])
     record_hit
