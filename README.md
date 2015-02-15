@@ -1,3 +1,6 @@
+[![Code Climate](https://codeclimate.com/github/ejbyne/battleships-web-app/badges/gpa.svg)](https://codeclimate.com/github/ejbyne/battleships-web-app)
+[![Test Coverage](https://codeclimate.com/github/ejbyne/battleships-web-app/badges/coverage.svg)](https://codeclimate.com/github/ejbyne/battleships-web-app)
+
 # Battleships
 
 ## Summary
