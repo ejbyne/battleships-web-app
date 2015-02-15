@@ -16,7 +16,6 @@ class BattleShips < Sinatra::Base
     redirect '/game' if invalid_shot
     session[:winner] = true if winner
     redirect '/results' if winner
-    end
   end
 
   get '/reset' do
