@@ -1,10 +1,8 @@
 class BattleShips < Sinatra::Base
 
   get '/place_ships' do
-    @player = GAME.select_player_by_id(session[:me])
-    @rows = @player.board.convert_grid_values_to_rows
     redirect '/game' if GAME.ready?
-    redirect '/waiting' if @player.board.ship_count == 5
+    redirect '/waiting' if player.board.ship_count == 5
     erb :place_ships
   end
 

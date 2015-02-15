@@ -1,6 +1,6 @@
-<h2>Hello, <%= @player.name %></h2>
+<h2>Hello, <%= player.name %></h2>
 
-<% if @player.board.ship_count == 0 %>
+<% if player.board.ship_count == 0 %>
   <p>Please enter the first coordinates and orientations of your ships</p>
 <% else %>
   <p>Place your next ship...</p>
@@ -17,7 +17,7 @@
     <% end %>
   </tr>
   <% number = "1" %>
-  <% @rows.each do |row| %>
+  <% player_cell_rows.each do |row| %>
   <tr>
     <th><%= number %></th>
       <% row.each do |cell| %>

@@ -9,21 +9,44 @@ class BattleShips < Sinatra::Base
     session[:me] = player.object_id
   end
 
+  def player
+    GAME.select_player_by_id(session[:me])
+  end
+
+  def other_player
+    other_player = GAME.select_other_player_by_id(session[:me])
+  end
+
+  def player_cell_rows
+    player.board.convert_grid_values_to_rows
+  end
+
+  def other_player_cell_rows
+    other_player.board.convert_grid_values_to_rows
+  end
+
   def place_ship
     ship_choice = params[:ship]
-    ship = Ship.aircraft_carrier if ship_choice == "aircraft_carrier"
-    ship = Ship.battleship if ship_choice == "battleship"
-    ship = Ship.destroyer if ship_choice == "destroyer"
-    ship = Ship.submarine if ship_choice == "submarine"
-    ship = Ship.patrol_boat if ship_choice == "patrol_boat"
+    ship = create_ship(ship_choice)
     board = GAME.select_player_by_id(session[:me]).board
     board.place(ship, (params[:column] + params[:row]), params[:orientation])
     session[ship_choice] = ship_choice
   end
 
+  def create_ship(ship_choice)
+    return Ship.aircraft_carrier if ship_choice == "aircraft_carrier"
+    return Ship.battleship if ship_choice == "battleship"
+    return Ship.destroyer if ship_choice == "destroyer"
+    return Ship.submarine if ship_choice == "submarine"
+    return Ship.patrol_boat if ship_choice == "patrol_boat"
+  end
+
   def fire_shot
-    other_player = GAME.select_other_player_by_id(session[:me])
     GAME.fire_at(params[:column] + params[:row])
+    record_hit
+  end
+
+  def record_hit
     if other_player.board.grid[(params[:column] + params[:row]).to_sym].content.is_a?(Ship)
       session[:hit?] = true
     else
