@@ -1,3 +1,4 @@
+require 'spec_helper'
 require_relative '../app/models/board'
 
 describe Board do

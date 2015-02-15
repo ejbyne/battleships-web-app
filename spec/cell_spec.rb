@@ -1,3 +1,4 @@
+require 'spec_helper'
 require_relative '../app/models/cell'
 
 describe Cell do

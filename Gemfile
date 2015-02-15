@@ -8,4 +8,5 @@ group :development, :test do
   gem 'capybara'
   gem 'rspec'
   gem 'selenium-webdriver'
+  gem "codeclimate-test-reporter", require: nil
 end
