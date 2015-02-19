@@ -19,10 +19,6 @@ This was a really exciting project, as after many weeks of learning to code it w
 - Cucumber
 - Capybara
 
-## Collaborators
-- [Ed Byne](https://github.com/ejbyne)
-- [Richard Lake](https://github.com/ralake)
-
 ## Instructions
 
 The live version of the game is available at <a href="https://battleships-web-app.herokuapp.com">https://battleships-web-app.herokuapp.com</a>
@@ -72,3 +68,7 @@ $ cucumber
 ## To do list
 - Improve CSS
 - Allow more than one game to occur at a time
+
+## Collaborators
+- [Ed Byne](https://github.com/ejbyne)
+- [Richard Lake](https://github.com/ralake)
